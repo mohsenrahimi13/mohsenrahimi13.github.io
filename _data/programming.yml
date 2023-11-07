@@ -1,0 +1,17 @@
+- name: Python
+  percentage: 95
+  color: success
+
+- name: R
+  percentage: 95
+  color: success
+
+- name: Java
+  percentage: 80
+  color: success
+
+- name: C/C++
+  percentage: 55
+  color: warning
+
+

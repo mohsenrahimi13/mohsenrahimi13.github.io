@@ -1,0 +1,24 @@
+
+- title: Master’s degree in data Analysis and Economics (Data Science Curriculum) | University of Bergamo
+  from: October 2020
+  to: October 2023
+  grade: 91/110 
+  thesis: "Enhancing Trust in AI, An Exploration of Interpretability Systems in Natural Language Processing Models"
+  focus:
+    - Enhanced NLP Model Interpretability | Developed a system to improve the transparency and interpretability of NLP sequence-to-class models.
+    - Multi-Module Framework | Designed a triad of modules for comprehensive interpretability insights.
+    - Adversarial Sample Generation | Generated adversarial samples to uncover local and global interpretability insights.
+    - Greedy Rule Extraction | Introduced a rule extraction algorithm using a greedy approach to enhance global interpretability.
+  technologies: ["python"]
+
+
+- title: Bachelor’s degree in Rock Mechanical Engineering | University of Tehran
+  from: October 2012
+  to: May 2018
+  grade: 3/4 
+  thesis: “Analyzing the difference between types of Grouting and its data on tunnelling.”
+
+
+- title: Highschool Diploma in Mathematic and Physics, Salam Tajrish, Iran
+  from: September 2008
+  to: May 2012

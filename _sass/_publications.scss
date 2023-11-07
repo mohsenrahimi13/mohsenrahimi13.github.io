@@ -1,0 +1,20 @@
+.publications-page {
+    .publication-card {
+      box-shadow: 0 4px 6px rgba(15, 139, 6, 0.1);
+      transition: all .3s ease;
+      &:hover {
+        box-shadow: 0 12px 15px rgba(239, 235, 235, 0.2);
+      }
+      .card-footer {
+        background-color: #f8f9fa;
+      }
+    }
+    .btn-primary {
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+  
+  // You will need to replace $primary-color with the actual primary color variable or value from your existing SCSS/CSS
+  

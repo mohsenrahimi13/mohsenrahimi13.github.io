@@ -1,0 +1,11 @@
+- title: "Why did you fail? An interpretability system for NLP models"
+  authors:
+    - "Mohsen Rahimi"
+    - "Giulia De Poli"
+    - "Andrea Masella"
+    - " Matteo Bregonzio"
+  summary: "The paper proposes an interpretability system that can analyse and interpret the predictions of black-box NLP models using adversarial examples."
+  date: "2023-04-20"
+  link: "https://icdsst2023.files.wordpress.com/2023/05/actes_imt_icdsst2023_v3.pdf"
+
+

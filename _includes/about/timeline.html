@@ -1,0 +1,60 @@
+<!-- Experience Section -->
+<h1 class="experience-title">Experience</h1>
+<div class="col mt-4">
+  <div class="timeline-body">
+    {% for item in site.data.experience %}
+      <div class="timeline-item">
+        <div class="content">
+          <h2>{{ item.title }}</h2>
+          <h6 class="date">{{ item.from }} — {{ item.to }}</h6>
+          <ul>
+            {% assign sentences = item.description | split: '. ' %}  <!-- Split the description into separate sentences -->
+            {% for sentence in sentences %}
+              {% unless sentence == empty %}  <!-- Avoid creating an empty list item if the last character is a period -->
+                <li>{{ sentence | append: '.' }}</li>  <!-- Create a list item for each sentence and append a period -->
+              {% endunless %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<h1 class="experience-title">Education</h1> <!-- Title for the Education Section -->
+<div class="col mt-4">
+  <div class="timeline-body">
+    {% for item in site.data.education %}
+      <div class="timeline-item">
+        <div class="content">
+          <h2>{{ item.title }}</h2>
+          <h6 class="date">{{ item.from }} — {{ item.to }}</h6>
+            
+          {% if item.grade %}
+            <p>Grade: {{ item.grade }}</p>
+          {% endif %}
+          
+          {% if item.thesis %}
+            <p><em>Thesis: {{ item.thesis }}</em></p>
+          {% endif %}
+          
+          {% if item.focus %}
+            <h5>Focus</h5>
+            <ul>
+              {% for focus_item in item.focus %}
+                {% if focus_item %}
+                  <li>{{ focus_item }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+          
+          {% if item.hashtags %}
+            <p>{{ item.hashtags }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
