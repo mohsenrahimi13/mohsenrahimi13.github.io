@@ -59,11 +59,32 @@
     .from(h1Split.chars, { yPercent: 115, rotate: 4, stagger: 0.035, duration: 1, ease: 'expo.out' }, heroStart)
     .from($('.hero .eyebrow'), { y: 14, opacity: 0, duration: 0.7 }, heroStart + 0.1)
     .from(lede.lines, { yPercent: 100, stagger: 0.08, duration: 0.9, ease: 'expo.out' }, heroStart + 0.35)
-    .from($$('.hero-cta .btn'), { y: 16, opacity: 0, stagger: 0.06, duration: 0.6 }, heroStart + 0.6)
+    .from($$('.hero-cta .btn, .now'), { y: 16, opacity: 0, stagger: 0.06, duration: 0.6 }, heroStart + 0.6)
     .from($('.photo-frame'), { clipPath: 'inset(0 0 100% 0 round 200px 200px 24px 24px)', duration: 1.3, ease: 'expo.inOut' }, heroStart + 0.1)
     .from($('.photo-frame img'), { scale: 1.25, duration: 1.6, ease: 'expo.out' }, heroStart + 0.1)
     .from($('.hero-photo figcaption'), { opacity: 0, y: 8, duration: 0.6 }, heroStart + 1)
     .from($('.hero-marquee'), { opacity: 0, duration: 0.8 }, heroStart + 0.9);
+
+  /* ---------- Name scramble on hover (per character, keeps the italic surname) ---------- */
+  if (fine) {
+    const glyphs = 'abcdefghiklnoprstuvxyz';
+    const chars = h1Split.chars.map(c => ({ el: c, orig: c.textContent }));
+    let running = false;
+    h1.addEventListener('mouseenter', () => {
+      if (running) return; running = true;
+      chars.forEach(c => { c.el.style.width = c.el.getBoundingClientRect().width + 'px'; c.el.style.textAlign = 'center'; });
+      const start = performance.now(), dur = 700;
+      const step = (t) => {
+        const p = Math.min(1, (t - start) / dur);
+        chars.forEach((c, i) => {
+          const settleAt = 0.25 + 0.75 * (i / chars.length);
+          c.el.textContent = (p >= settleAt || c.orig === ' ') ? c.orig : glyphs[Math.floor(Math.random() * glyphs.length)];
+        });
+        if (p < 1) requestAnimationFrame(step); else { chars.forEach(c => { c.el.textContent = c.orig; c.el.style.width = ''; c.el.style.textAlign = ''; }); running = false; }
+      };
+      requestAnimationFrame(step);
+    });
+  }
 
   /* ---------- Hero parallax ---------- */
   gsap.to('.hero-photo', {

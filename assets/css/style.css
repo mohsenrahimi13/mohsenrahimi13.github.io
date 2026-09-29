@@ -390,3 +390,13 @@ html:not(.motion) .preloader { display: none; }
 .contact-copy.is-copied .cc-value::after { content: " — copied"; color: var(--accent); }
 [data-scramble] { font-variant-numeric: tabular-nums; }
 .photo-frame { will-change: transform; }
+
+.now { display: flex; align-items: baseline; gap: .6rem; margin-top: 1.6rem; font-size: .9rem; color: var(--ink-2); max-width: 42ch; }
+.now-label { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.now-dot { position: relative; top: -1px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: none; align-self: center; box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); animation: pulse 2.2s ease-out infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); } 70% { box-shadow: 0 0 0 9px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+@media (prefers-reduced-motion: reduce) { .now-dot { animation: none; } }
+.now a { color: var(--ink); border-bottom: 1px solid var(--accent-2); }
+.now a:hover { color: var(--accent); text-decoration: none; }
+h1[data-scramble-chars] { cursor: default; white-space: nowrap; }
+@media (max-width: 480px) { h1[data-scramble-chars] { white-space: normal; } }
