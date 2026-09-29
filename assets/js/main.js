@@ -42,7 +42,8 @@
   onScroll();
 
   /* Scroll reveal */
-  const pending = new Set($$('.reveal'));
+  const motion = document.documentElement.classList.contains('motion');
+  const pending = new Set(motion ? [] : $$('.reveal'));
   const show = (el) => { el.classList.add('is-visible'); pending.delete(el); };
   // Reveal anything at or above the viewport line (covers anchor jumps and mid-page reloads,
   // where IntersectionObserver alone would leave skipped elements invisible).

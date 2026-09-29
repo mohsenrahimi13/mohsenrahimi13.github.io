@@ -40,6 +40,14 @@
   </script>
 </head>
 <body>
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="pre-inner">
+      <div class="pre-name-wrap"><span class="pre-name">Mohsen Rahimi</span></div>
+      <span class="pre-count">000</span>
+    </div>
+    <span class="pre-line"></span>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
   <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 
@@ -79,6 +87,7 @@
     <!-- ================= HERO ================= -->
     <section class="hero" id="top">
       <div class="container hero-grid">
+        <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
         <div class="hero-text">
           <p class="eyebrow reveal">Ph.D. Candidate in Economics · University of Bergamo</p>
           <h1 class="reveal" style="--d:.08s">Mohsen <em>Rahimi</em></h1>
@@ -121,7 +130,7 @@
         </div>
         <div class="about-grid">
           <div class="about-text reveal">
-            <p>
+            <p data-words>
               I am a Ph.D. candidate in Economics at the <a href="https://www.unibg.it/" target="_blank" rel="noopener">University of Bergamo</a>,
               advised by <a href="http://sergio-galletta.com" target="_blank" rel="noopener">Sergio Galletta</a>
               (ETH Zürich / Sapienza University of Rome). My work sits at the intersection of
@@ -129,13 +138,13 @@
               central‑bank transcripts, audit reports, policy documents — and use them to ask how institutions actually
               make decisions, and for whom.
             </p>
-            <p>
+            <p data-words>
               Before the Ph.D. I worked as a data scientist in Milan, where I designed explainable‑AI systems
               for NLP models and deployed production ML pipelines on Kubernetes and Google Cloud. That
               experience shapes how I approach research: models should be transparent enough to be
               audited, and fair enough to be trusted with policy.
             </p>
-            <p>
+            <p data-words>
               I hold an M.Sc. in Economics and Data Analysis from Bergamo and a B.Sc. in engineering from the
               University of Tehran.
             </p>
@@ -382,6 +391,11 @@
     </div>
   </footer>
 
+  <script src="assets/vendor/gsap.min.js" defer></script>
+  <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="assets/vendor/SplitText.min.js" defer></script>
+  <script src="assets/vendor/lenis.min.js" defer></script>
+  <script src="assets/js/motion.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
