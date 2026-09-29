@@ -268,6 +268,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .paper-abstract p { margin-top: 1rem; color: var(--ink-2); font-size: .98rem; }
 .paper-tags { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; margin-bottom: .25rem; }
 .paper-tags li { font-size: .75rem; color: var(--muted); border: 1px solid var(--line); padding: .2rem .55rem; border-radius: 999px; }
+.paper-cite { font-size: .88rem; color: var(--muted); border-left: 2px solid var(--line); padding-left: .9rem; margin-top: .9rem; }
+.paper-links { margin: .6rem 0 .8rem; font-size: .9rem; font-weight: 500; }
 .note { font-size: .85rem; color: var(--muted); margin-top: 1.5rem; }
 
 /* Experience timeline */
