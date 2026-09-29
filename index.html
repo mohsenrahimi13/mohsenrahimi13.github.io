@@ -58,11 +58,11 @@
         <span class="brand-name">Mohsen Rahimi</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="#about" data-nav>About</a>
-        <a href="#research" data-nav>Research</a>
-        <a href="#teaching" data-nav>Teaching</a>
-        <a href="assets/Mohsen_Rahimi_CV.pdf" target="_blank" rel="noopener">CV</a>
-        <a href="#contact" data-nav>Contact</a>
+        <a href="#about" data-nav data-scramble>About</a>
+        <a href="#research" data-nav data-scramble>Research</a>
+        <a href="#teaching" data-nav data-scramble>Teaching</a>
+        <a href="assets/Mohsen_Rahimi_CV.pdf" target="_blank" rel="noopener" data-scramble>CV</a>
+        <a href="#contact" data-nav data-scramble>Contact</a>
       </nav>
       <div class="nav-actions">
         <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
@@ -87,7 +87,6 @@
     <!-- ================= HERO ================= -->
     <section class="hero" id="top">
       <div class="container hero-grid">
-        <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
         <div class="hero-text">
           <p class="eyebrow reveal">Ph.D. Candidate in Economics · University of Bergamo</p>
           <h1 class="reveal" style="--d:.08s">Mohsen <em>Rahimi</em></h1>
@@ -100,17 +99,12 @@
             <a class="btn btn-primary" href="#research">Research <span aria-hidden="true">↓</span></a>
             <a class="btn btn-ghost" href="assets/Mohsen_Rahimi_CV.pdf" target="_blank" rel="noopener">Download CV</a>
           </div>
-          <ul class="hero-links reveal" style="--d:.32s" aria-label="Profiles">
-            <li><a href="mailto:mohsen.rahimi@unibg.it" data-email>mohsen.rahimi<span>@</span>unibg.it</a></li>
-            <li><a href="https://github.com/mohsenrahimi13" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/rahimimo" target="_blank" rel="noopener">LinkedIn</a></li>
-          </ul>
         </div>
         <figure class="hero-photo reveal" style="--d:.2s">
           <div class="photo-frame">
             <img src="assets/img/mohsen.jpg" alt="Portrait of Mohsen Rahimi" width="900" height="1125" fetchpriority="high">
           </div>
-          <figcaption>Bergamo, Italy</figcaption>
+          <figcaption>Bergamo, Italy <span class="clock" id="clock" aria-label="Local time in Bergamo"></span></figcaption>
         </figure>
       </div>
       <div class="hero-marquee" aria-hidden="true">
@@ -363,10 +357,10 @@
           </p>
         </div>
         <div class="contact-cards reveal" style="--d:.08s">
-          <a class="contact-card" href="mailto:mohsen.rahimi@unibg.it">
-            <span class="cc-label">Email</span>
+          <button class="contact-card contact-copy" type="button" data-copy="mohsen.rahimi@unibg.it" aria-label="Copy email address">
+            <span class="cc-label">Email <span class="cc-hint">click to copy</span></span>
             <span class="cc-value">mohsen.rahimi@unibg.it</span>
-          </a>
+          </button>
           <a class="contact-card" href="https://github.com/mohsenrahimi13" target="_blank" rel="noopener">
             <span class="cc-label">GitHub</span>
             <span class="cc-value">@mohsenrahimi13</span>

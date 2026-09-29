@@ -59,7 +59,7 @@
     .from(h1Split.chars, { yPercent: 115, rotate: 4, stagger: 0.035, duration: 1, ease: 'expo.out' }, heroStart)
     .from($('.hero .eyebrow'), { y: 14, opacity: 0, duration: 0.7 }, heroStart + 0.1)
     .from(lede.lines, { yPercent: 100, stagger: 0.08, duration: 0.9, ease: 'expo.out' }, heroStart + 0.35)
-    .from($$('.hero-cta .btn, .hero-links li'), { y: 16, opacity: 0, stagger: 0.06, duration: 0.6 }, heroStart + 0.6)
+    .from($$('.hero-cta .btn'), { y: 16, opacity: 0, stagger: 0.06, duration: 0.6 }, heroStart + 0.6)
     .from($('.photo-frame'), { clipPath: 'inset(0 0 100% 0 round 200px 200px 24px 24px)', duration: 1.3, ease: 'expo.inOut' }, heroStart + 0.1)
     .from($('.photo-frame img'), { scale: 1.25, duration: 1.6, ease: 'expo.out' }, heroStart + 0.1)
     .from($('.hero-photo figcaption'), { opacity: 0, y: 8, duration: 0.6 }, heroStart + 1)
@@ -153,64 +153,17 @@
     onLeaveBack: () => nav.classList.remove('is-hidden')
   });
 
-  /* ---------- Hero background: a scatterplot that fits its own regression ---------- */
-  const canvas = $('#hero-canvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let W, H, pts = [], fit = { a: 0, b: 0 }, progress = { p: 0 };
-    const rng = (seed => () => (seed = (seed * 16807) % 2147483647) / 2147483647)(20260929);
-    const gen = () => {
-      pts = [];
-      for (let i = 0; i < 70; i++) {
-        const x = rng();
-        // Box–Muller noise
-        const u = rng() || 1e-9, v = rng();
-        const n = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
-        pts.push({ x, y: 0.25 + 0.5 * x + 0.09 * n });
-      }
-      const n = pts.length, sx = pts.reduce((s, p) => s + p.x, 0), sy = pts.reduce((s, p) => s + p.y, 0);
-      const sxx = pts.reduce((s, p) => s + p.x * p.x, 0), sxy = pts.reduce((s, p) => s + p.x * p.y, 0);
-      fit.b = (n * sxy - sx * sy) / (n * sxx - sx * sx); fit.a = (sy - fit.b * sx) / n;
-    };
-    const color = () => getComputedStyle(root).getPropertyValue('--accent').trim() || '#7a2e2e';
-    const ink = () => getComputedStyle(root).getPropertyValue('--ink').trim() || '#000';
-    const size = () => {
-      const r = canvas.getBoundingClientRect(); const d = Math.min(2, window.devicePixelRatio || 1);
-      W = r.width; H = r.height; canvas.width = W * d; canvas.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
-    };
-    const X = x => 0.08 * W + x * 0.84 * W, Y = y => H - (0.12 * H + y * 0.76 * H);
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H);
-      const p = progress.p, c = color(), k = ink();
-      // axes
-      ctx.strokeStyle = k; ctx.globalAlpha = 0.18; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(X(0), Y(0)); ctx.lineTo(X(0) + (X(1) - X(0)) * Math.min(1, p * 2), Y(0)); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(X(0), Y(0)); ctx.lineTo(X(0), Y(0) - (Y(0) - Y(1)) * Math.min(1, p * 2)); ctx.stroke();
-      // points
-      const nShow = Math.floor(pts.length * Math.max(0, Math.min(1, (p - 0.15) / 0.5)));
-      pts.slice(0, nShow).forEach((pt, i) => {
-        const fade = Math.min(1, (nShow - i) / 6);
-        ctx.globalAlpha = 0.55 * fade; ctx.fillStyle = k;
-        ctx.beginPath(); ctx.arc(X(pt.x), Y(pt.y), 2.2, 0, Math.PI * 2); ctx.fill();
-      });
-      // residuals then fitted line
-      const lp = Math.max(0, Math.min(1, (p - 0.65) / 0.35));
-      if (lp > 0) {
-        ctx.globalAlpha = 0.16 * lp; ctx.strokeStyle = c; ctx.lineWidth = 1;
-        pts.forEach(pt => { ctx.beginPath(); ctx.moveTo(X(pt.x), Y(pt.y)); ctx.lineTo(X(pt.x), Y(fit.a + fit.b * pt.x)); ctx.stroke(); });
-        ctx.globalAlpha = 0.9; ctx.lineWidth = 1.6; ctx.strokeStyle = c;
-        ctx.beginPath(); ctx.moveTo(X(0), Y(fit.a)); ctx.lineTo(X(lp), Y(fit.a + fit.b * lp)); ctx.stroke();
-        if (lp >= 1) {
-          ctx.globalAlpha = 0.7; ctx.fillStyle = c; ctx.font = '500 11px ui-monospace, SFMono-Regular, Menlo, monospace';
-          ctx.fillText('ŷ = ' + fit.a.toFixed(2) + ' + ' + fit.b.toFixed(2) + 'x', X(0.3), Y(0) + 16);
-        }
-      }
-      ctx.globalAlpha = 1;
-    };
-    gen(); size(); draw();
-    gsap.to(progress, { p: 1, duration: 3.2, ease: 'power2.inOut', delay: heroStart + 0.4, onUpdate: draw });
-    window.addEventListener('resize', () => { size(); draw(); });
-    $('#theme-toggle') && $('#theme-toggle').addEventListener('click', () => setTimeout(draw, 50));
+  /* ---------- Photo follows the cursor a little ---------- */
+  if (fine) {
+    const frame = $('.photo-frame');
+    const px = gsap.quickTo(frame, 'x', { duration: 0.8, ease: 'power3' });
+    const py = gsap.quickTo(frame, 'y', { duration: 0.8, ease: 'power3' });
+    const rot = gsap.quickTo(frame, 'rotation', { duration: 0.8, ease: 'power3' });
+    $('.hero').addEventListener('mousemove', (e) => {
+      const nx = e.clientX / window.innerWidth - 0.5, ny = e.clientY / window.innerHeight - 0.5;
+      px(nx * -18); py(ny * -14); rot(nx * -1.5);
+    });
+    $('.hero').addEventListener('mouseleave', () => { px(0); py(0); rot(0); });
   }
 
   // Once fonts are in, SplitText line breaks are final

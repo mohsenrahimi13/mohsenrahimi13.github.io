@@ -96,6 +96,37 @@
     papers.forEach(p => p.classList.toggle('is-hidden', f !== 'all' && p.dataset.type !== f));
   }));
 
+  /* Live Bergamo clock */
+  const clock = $('#clock');
+  if (clock) {
+    const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
+    const tick = () => { clock.textContent = '· ' + fmt.format(new Date()); };
+    tick(); setInterval(tick, 15000);
+  }
+
+  /* Copy email */
+  $$('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
+    const v = btn.dataset.copy;
+    try { await navigator.clipboard.writeText(v); btn.classList.add('is-copied'); setTimeout(() => btn.classList.remove('is-copied'), 1800); }
+    catch (e) { window.location.href = 'mailto:' + v; }
+  }));
+
+  /* Text scramble on hover (decode effect) */
+  const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&';
+  $$('[data-scramble]').forEach(el => {
+    const original = el.textContent; let raf = null;
+    el.addEventListener('mouseenter', () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      cancelAnimationFrame(raf); const start = performance.now(); const dur = 420;
+      const step = (t) => {
+        const p = Math.min(1, (t - start) / dur); const fixed = Math.floor(p * original.length);
+        el.textContent = original.split('').map((ch, i) => (i < fixed || ch === ' ') ? ch : glyphs[Math.floor(Math.random() * glyphs.length)]).join('');
+        if (p < 1) raf = requestAnimationFrame(step); else el.textContent = original;
+      };
+      raf = requestAnimationFrame(step);
+    });
+  });
+
   /* Footer year */
   const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
 })();
